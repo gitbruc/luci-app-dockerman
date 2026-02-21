@@ -117,9 +117,8 @@ return dm2.dv.extend({
 			]));
 			mainContainer.appendChild(E('div', { 'class': 'cbi-section-node' }, [
 				E('div', { 'class': 'cbi-value' }, [
-					E('em', { 'class': 'spinning' }, _('Docker daemon is not running or not reachable.')),
-					E('br'),
-					E('em', {}, info_response?.body?.message)
+					E('p', { 'class': 'spinning' }, _('Docker daemon is not running or not reachable.')),
+					E('p', { 'style': 'font-family: monospace; color: #888; margin-left: 1.5em;'}, info_response?.body?.message)
 				])
 			]));
 
@@ -179,36 +178,51 @@ return dm2.dv.extend({
 		if (isLocal)
 			mainContainer.appendChild(E('div', { 'class': 'cbi-section' }, [
 				E('div', { 'style': 'display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;' }, [
-					E('button', { 'class': 'btn cbi-button-action neutral', 'click': () => this.handleAction('dockerd', 'restart') }, _('Restart', 'daemon restart action')),
-					E('button', { 'class': 'btn cbi-button-action negative', 'click': () => this.handleAction('dockerd', 'stop') }, _('Stop', 'daemon stop action')),
+					E('button', { 'class': 'btn cbi-button-action neutral', 'click': () => this.handleAction('dockerd', 'restart').then(() => {
+						L.ui.showModal(_('Restarting daemon...'), [
+							E('p', { 'class': 'spinning' }, _('The page will be reloaded in 10 seconds.'))
+						]);
+						setTimeout(() => window.location.reload(), 10000);
+					}) }, _('Restart', 'daemon restart action')),
+					E('button', { 'class': 'btn cbi-button-action cbi-button-remove', 'click': () => this.handleAction('dockerd', 'stop').then(() => {
+						L.ui.showModal(_('Stopping daemon...'), [
+							E('p', { 'class': 'spinning' }, _('The page will be reloaded in 5 seconds.'))
+						]);
+						setTimeout(() => window.location.reload(), 5000);
+					}) }, _('Stop', 'daemon stop action')),
 				])
 			]));
 
-		// Create the info table
-		const summaryTable = new L.ui.Table(
-			[_('Info'), ''],
-			{ id: 'containers-table', style: 'width: 100%; table-layout: auto;' },
-			[]
-		);
+		const info_data = {
+			[_('Docker Version')]: version_response.body.Version,
+			[_('Api Version')]: version_response.body.ApiVersion,
+			[_('CPUs')]: info_response.body.NCPU,
+			[_('Total Memory')]: '%1024.2m'.format(info_response.body.MemTotal),
+			[_('Docker Root Dir')]: `${info_response.body.DockerRootDir} ${ (isLocal && this.freespace) ? this.freespace : '' }`,
+			[_('Index Server Address')]: info_response.body.IndexServerAddress,
+			[_('Registry Mirrors')]: (info_response.body.RegistryConfig?.Mirrors ?? []).join(', ') || '-',
+		};
 
-		summaryTable.update([
-			[ _('Docker Version'), version_response.body.Version ],
-			[ _('Api Version'), version_response.body.ApiVersion ],
-			[ _('CPUs'), info_response.body.NCPU ],
-			[ _('Total Memory'), '%1024.2m'.format(info_response.body.MemTotal) ],
-			[ _('Docker Root Dir'), `${info_response.body.DockerRootDir} ${ (isLocal && this.freespace) ? this.freespace : '' }` ],
-			[ _('Index Server Address'), info_response.body.IndexServerAddress ],
-			[ _('Registry Mirrors'), info_response.body.RegistryConfig?.Mirrors || '-' ],
-		]);
+		const info_body_table = [];
+		this.parseBody(info_data, info_body_table);
 
-		// Wrap the table in a cbi-section
-		mainContainer.appendChild(E('div', { 'class': 'cbi-section' }, [
-			summaryTable.render()
-		]));
+		const m_info = new form.JSONMap({ ib: info_body_table });
+		m_info.readonly = true;
+		m_info.tabbed = false;
+		const s_info = m_info.section(form.TableSection, 'ib', _('Info'));
+		s_info.anonymous = true;
+		s_info.option(form.DummyValue, 'entry', _('Name'));
+		s_info.option(form.DummyValue, 'value', _('Value'));
 
+		const m_version = new form.JSONMap({ vb: version_body });
+		m_version.readonly = true;
+		m_version.tabbed = false;
+		const s_version = m_version.section(form.TableSection, 'vb', _('Version'));
+		s_version.anonymous = true;
+		s_version.option(form.DummyValue, 'entry', _('Name'));
+		s_version.option(form.DummyValue, 'value', _('Value'));
 
-		// Create a container div with grid layout for the status badges
-		let statusContainer = E('div', { style: 'display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;' }, [
+		const statusContainer = E('div', { style: 'display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;' }, [
 			this.overviewBadge(`${this.dockerman_url}/containers`,
 				E('img', {
 					src: L.resource('dockerman/containers.svg'),
@@ -251,39 +265,12 @@ return dm2.dv.extend({
 				view.volactivecount ? view.volactivecount : ''),
 		]);
 
-		// Add badges section
-		mainContainer.appendChild(statusContainer);
-
-		const m = new form.JSONMap({
-			// df: df_body,
-			vb: version_body,
-			ib: info_body
+		return Promise.all([m_info.render(), m_version.render()]).then(([info_fe, version_fe]) => {
+			mainContainer.appendChild(info_fe);
+			mainContainer.appendChild(statusContainer);
+			mainContainer.appendChild(version_fe);
+			return mainContainer;
 		});
-		m.readonly = true;
-		m.tabbed = false;
-
-		let s;
-
-		// Add Version and Environment tables
-		s = m.section(form.TableSection, 'vb', _('Version'));
-		s.anonymous = true;
-
-		s.option(form.DummyValue, 'entry', _('Name'));
-		s.option(form.DummyValue, 'value', _('Value'));
-
-		s = m.section(form.TableSection, 'ib', _('Environment'));
-		s.anonymous = true;
-		s.filterrow = true;
-
-		s.option(form.DummyValue, 'entry', _('Entry'));
-		s.option(form.DummyValue, 'value', _('Value'));
-
-		// Render the form sections and append them
-		return m.render()
-			.then(fe => {
-				mainContainer.appendChild(fe);
-				return mainContainer;
-			});
 	},
 
 	overviewBadge(url, resource_div, caption, total_caption, total_count, active_caption, active_count) {
