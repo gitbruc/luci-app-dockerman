@@ -2467,3 +2467,30 @@ msgstr "实验性功能"
 
 msgid "Enable Docker experimental features."
 msgstr "启用 Docker 的实验性功能。"
+
+msgid "HTTP Proxy"
+msgstr "HTTP 代理"
+
+msgid "Set the HTTP proxy for Docker (optional)"
+msgstr "为 Docker 设置 HTTP 代理（可选）"
+
+msgid "Example: http://proxy.example.com:3128"
+msgstr "示例：http://proxy.example.com:3128"
+
+msgid "HTTPS Proxy"
+msgstr "HTTPS 代理"
+
+msgid "Set the HTTPS proxy for Docker (optional)"
+msgstr "为 Docker 设置 HTTPS 代理（可选）"
+
+msgid "Example: https://proxy.example.com:3128"
+msgstr "示例：https://proxy.example.com:3128"
+
+msgid "No Proxy (no_proxy)"
+msgstr "不使用代理的地址 (no_proxy)"
+
+msgid "Set addresses that bypass the proxy for Docker (optional, comma separated)"
+msgstr "为 Docker 设置不走代理的地址列表（可选，英文逗号分隔）"
+
+msgid "Example: *.test.example.com,.example.org,127.0.0.0/8"
+msgstr "示例：*.test.example.com,.example.org,127.0.0.0/8"

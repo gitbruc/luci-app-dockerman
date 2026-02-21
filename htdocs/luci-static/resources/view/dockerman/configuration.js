@@ -71,6 +71,24 @@ return L.view.extend({
 		o.placeholder = '172.17.0.1/16';
 		o.datatype = 'ipaddr';
 
+		o = s.taboption('globals', form.Value, 'http_proxy',
+			_('HTTP Proxy'),
+			_('Set the HTTP proxy for Docker (optional)'));
+		o.placeholder = _('Example: `http://proxy.example.com:3128`');
+		o.rmempty = true;
+
+		o = s.taboption('globals', form.Value, 'https_proxy',
+			_('HTTPS Proxy'),
+			_('Set the HTTPS proxy for Docker (optional)'));
+		o.placeholder = _('Example: `https://proxy.example.com:3128`');
+		o.rmempty = true;
+
+		o = s.taboption('globals', form.Value, 'no_proxy',
+			_('No Proxy (no_proxy)'),
+			_('Set addresses that bypass the proxy for Docker (optional, comma separated)'));
+		o.placeholder = _('Example: *.test.example.com,.example.org,127.0.0.0/8');
+		o.rmempty = true;
+
 		o = s.taboption('globals', form.DynamicList, 'registry_mirrors',
 			_('Registry Mirrors'),
 			_('It replaces the daemon registry mirrors with a new set of registry mirrors'));
