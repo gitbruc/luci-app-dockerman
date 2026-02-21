@@ -22,6 +22,18 @@ return L.view.extend({
 
 		t = s.tab('globals', _('Globals'));
 
+		o = s.taboption('globals', form.Flag, 'buildkit',
+			_('Enable BuildKit'),
+			_('BuildKit is an improved backend to replace the legacy builder.'));
+		o.rmempty = false;
+		o.optional = true;
+
+		o = s.taboption('globals', form.Flag, 'experimental',
+			_('Experimental Features'),
+			_('Enable Docker experimental features.'));
+		o.rmempty = false;
+		o.optional = true;
+
 		o = s.taboption('globals', form.Value, 'ps_flags',
 			_('Default ps flags'),
 			_('Flags passed to docker top (ps). Leave empty to use the built-in default.'));

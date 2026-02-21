@@ -2455,3 +2455,15 @@ msgstr "页面将在 10 秒后重新加载。"
 
 msgid "Stopping daemon..."
 msgstr "正在停止守护进程…"
+
+msgid "Enable BuildKit"
+msgstr "启用 BuildKit"
+
+msgid "BuildKit is an improved backend to replace the legacy builder."
+msgstr "BuildKit 是一个改进的后端，用于替代旧版构建器。"
+
+msgid "Experimental Features"
+msgstr "实验性功能"
+
+msgid "Enable Docker experimental features."
+msgstr "启用 Docker 的实验性功能。"
