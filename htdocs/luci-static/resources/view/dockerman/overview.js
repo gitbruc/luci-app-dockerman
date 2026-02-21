@@ -69,14 +69,14 @@ return dm2.dv.extend({
 		// const now = Math.floor(Date.now() / 1000);
 
 		return Promise.all([
-			dm2.docker_version(),
-			dm2.docker_info(),
+			dm2.docker_version().catch(e => ({ body: { message: e.message }, error: e })),
+			dm2.docker_info().catch(e => ({ code: 500, body: { message: e.message }, error: e })),
 			// dm2.docker_df(), // takes > 20 seconds on large docker environments
-			dm2.container_list().then(r => r.body || []),
-			dm2.image_list().then(r => r.body || []),
-			dm2.network_list().then(r => r.body || []),
-			dm2.volume_list().then(r => r.body || []),
-			dm2.callMountPoints(),
+			dm2.container_list().then(r => r.body || []).catch(e => []),
+			dm2.image_list().then(r => r.body || []).catch(e => []),
+			dm2.network_list().then(r => r.body || []).catch(e => []),
+			dm2.volume_list().then(r => r.body || []).catch(e => ({ Volumes: [] })),
+			dm2.callMountPoints().catch(e => []),
 		]);
 	},
 
@@ -110,7 +110,35 @@ return dm2.dv.extend({
 			isLocal = true;
 
 		if (info_response?.code !== 200) {
-			return E('div', {}, [ info_response?.body?.message ]);
+			const mainContainer = E('div', { 'class': 'cbi-map' });
+			mainContainer.appendChild(E('h2', { 'class': 'section-title' }, [_('Docker - Overview')]));
+			mainContainer.appendChild(E('div', { 'class': 'cbi-map-descr' }, [
+				_('An overview with the relevant data is displayed here with which the LuCI docker client is connected.'),
+			]));
+			mainContainer.appendChild(E('div', { 'class': 'cbi-section-node' }, [
+				E('div', { 'class': 'cbi-value' }, [
+					E('em', { 'class': 'spinning' }, _('Docker daemon is not running or not reachable.')),
+					E('br'),
+					E('em', {}, info_response?.body?.message)
+				])
+			]));
+
+			if (isLocal) {
+				mainContainer.appendChild(E('div', { 'class': 'cbi-section' }, [
+					E('div', { 'style': 'display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;' }, [
+						E('button', {
+							'class': 'btn cbi-button-action positive',
+							'click': () => this.handleAction('dockerd', 'start').then(() => {
+								L.ui.showModal(_('Starting daemon...'), [
+									E('p', { 'class': 'spinning' }, _('The page will be reloaded in 5 seconds.'))
+								]);
+								setTimeout(() => window.location.reload(), 5000);
+							})
+						}, _('Start', 'daemon start action')),
+					])
+				]));
+			}
+			return mainContainer;
 		}
 
 		this.parseHeaders(version_response.headers, version_headers);
