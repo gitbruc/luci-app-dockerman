@@ -1,9 +1,10 @@
 {
 	"admin/docker": {
 		"title": "Docker",
-		"order": "41",
+		"order": 41,
 		"action": {
-			"type": "firstchild"
+			"type": "firstchild",
+			"recurse": true
 		},
 		"depends": {
 			"acl": [ "luci-app-dockerman" ],
