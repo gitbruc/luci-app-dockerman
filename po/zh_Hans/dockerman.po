@@ -2437,3 +2437,21 @@ msgstr "有警告"
 #~ msgstr ""
 #~ "按下导入按钮时，既可以将本地镜像文件加载到系统上，也可以从远程下载有效的"
 #~ "Tar格式的镜像文件。"
+
+msgid "Docker daemon is not running."
+msgstr "Docker 守护进程未运行。"
+
+msgid "Starting daemon..."
+msgstr "正在启动守护进程…"
+
+msgid "The page will be reloaded in 5 seconds."
+msgstr "页面将在 5 秒后重新加载。"
+
+msgid "Restarting daemon..."
+msgstr "正在重启守护进程…"
+
+msgid "The page will be reloaded in 10 seconds."
+msgstr "页面将在 10 秒后重新加载。"
+
+msgid "Stopping daemon..."
+msgstr "正在停止守护进程…"

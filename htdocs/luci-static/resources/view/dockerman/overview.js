@@ -117,7 +117,7 @@ return dm2.dv.extend({
 			]));
 			mainContainer.appendChild(E('div', { 'class': 'cbi-section-node' }, [
 				E('div', { 'class': 'cbi-value' }, [
-					E('p', { 'class': 'spinning' }, _('Docker daemon is not running or not reachable.')),
+					E('p', { 'class': 'spinning' }, _('Docker daemon is not running.')),
 					E('p', { 'style': 'font-family: monospace; color: #888; margin-left: 1.5em;'}, info_response?.body?.message)
 				])
 			]));
@@ -170,9 +170,7 @@ return dm2.dv.extend({
 		// Add heading and description first
 		mainContainer.appendChild(E('h2', { 'class': 'section-title' }, [_('Docker - Overview')]));
 		mainContainer.appendChild(E('div', { 'class': 'cbi-map-descr' }, [
-			_('An overview with the relevant data is displayed here with which the LuCI docker client is connected.'),
-			E('br'),
-			E('a', { href: 'https://github.com/openwrt/luci/blob/master/applications/luci-app-dockerman/README.md' }, ['README'])
+			_('An overview with the relevant data is displayed here with which the LuCI docker client is connected.')
 		]));
 
 		if (isLocal)
