@@ -273,7 +273,7 @@ msgstr "命令成功了"
 
 #: applications/luci-app-dockerman/htdocs/luci-static/resources/view/dockerman/container.js:1012
 msgid "Command:"
-msgstr "Command："
+msgstr "命令："
 
 #: applications/luci-app-dockerman/htdocs/luci-static/resources/view/dockerman/network.js:80
 msgid "Config Only"
