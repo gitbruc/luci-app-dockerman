@@ -163,7 +163,7 @@ return dm2.dv.extend({
 
 		this.freespace = isLocal ? mounts.find(m => m.mount === info?.DockerRootDir)?.avail || 0 : 0;
 		if (isLocal && this.freespace !== 0)
-			this.freespace = '(' + '%1024.2m'.format(this.freespace) + ' ' + _('Available') + ')';
+			this.freespace = '(' + '%1024.2mB'.format(this.freespace) + ' ' + _('Available') + ')';
 
 		const mainContainer = E('div', { 'class': 'cbi-map' });
 
@@ -195,7 +195,7 @@ return dm2.dv.extend({
 			[_('Docker Version')]: version_response.body.Version,
 			[_('Api Version')]: version_response.body.ApiVersion,
 			[_('CPUs')]: info_response.body.NCPU,
-			[_('Total Memory')]: '%1024.2m'.format(info_response.body.MemTotal),
+			[_('Total Memory')]: '%1024.2mB'.format(info_response.body.MemTotal),
 			[_('Docker Root Dir')]: `${info_response.body.DockerRootDir} ${ (isLocal && this.freespace) ? this.freespace : '' }`,
 			[_('Index Server Address')]: info_response.body.IndexServerAddress,
 			[_('Registry Mirrors')]: (info_response.body.RegistryConfig?.Mirrors ?? []).join(', ') || '-',

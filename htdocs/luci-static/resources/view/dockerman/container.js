@@ -749,8 +749,8 @@ return dm2.dv.extend({
 						memUsage ? createProgressBar(
 							_('Memory Usage'),
 							memUsage.percentage,
-							'%1024.2m'.format(memUsage.used),
-							'%1024.2m'.format(memUsage.limit)
+							'%1024.2mB'.format(memUsage.used),
+							'%1024.2mB'.format(memUsage.limit)
 						) : E('div', {}, _('Memory usage data unavailable'))
 					);
 					progressBarsSection.appendChild(
@@ -780,8 +780,8 @@ return dm2.dv.extend({
 				memUsage ? createProgressBar(
 					_('Memory Usage'),
 					memUsage.percentage,
-					'%1024.2m'.format(memUsage.used),
-					'%1024.2m'.format(memUsage.limit)
+					'%1024.2mB'.format(memUsage.used),
+					'%1024.2mB'.format(memUsage.limit)
 				) : E('div', {}, _('Memory usage data unavailable')),
 				cpuUsage ? createProgressBar(
 					_('CPU Usage') + ` (${cpuUsage.number_cpus} CPUs)`,
