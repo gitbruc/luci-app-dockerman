@@ -62,7 +62,7 @@ return dm2.dv.extend({
 		s.addremove = false;
 		s.anonymous = true;
 		const prune = s.option(form.Button, '_prune', null);
-		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n} ${dm2.ActionTypes['prune'].e}`;
+		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
 		prune.onclick = L.bind(function(sid, ev) {
 
@@ -106,7 +106,7 @@ return dm2.dv.extend({
 		volSec.addremove = true;
 		volSec.sortable = true;
 		volSec.filterrow = true;
-		volSec.addbtntitle = `${dm2.ActionTypes['create'].i18n} ${dm2.ActionTypes['create'].e}`;
+		volSec.addbtntitle = `${dm2.ActionTypes['create'].i18n}`;
 		volSec.footer = [
 			`${_('Total')} ${volume_list.length}`,
 		];
@@ -145,7 +145,7 @@ return dm2.dv.extend({
 					E('button', {
 						'class': 'cbi-button',
 						'click': ui.hideModal
-					}, ['↩']),
+					}, [_('Cancel')]),
 					' ',
 					E('button', {
 						'class': 'cbi-button cbi-button-positive',
@@ -173,7 +173,7 @@ return dm2.dv.extend({
 								}
 							);
 						})
-					}, [dm2.Types['volume'].sub['create'].e])
+					}, [dm2.Types['volume'].sub['create'].i18n])
 				])
 			]);
 		};
@@ -216,7 +216,7 @@ return dm2.dv.extend({
 					'class': 'cbi-button view',
 					'title': dm2.ActionTypes['inspect'].i18n,
 					'click': ui.createHandlerFn(this, this.handleInspect, sid),
-				}, [dm2.ActionTypes['inspect'].e]),
+				}, [dm2.ActionTypes['inspect'].i18n]),
 
 				E('div', {
 					'style': 'width: 20px',
@@ -228,19 +228,19 @@ return dm2.dv.extend({
 					'title': dm2.ActionTypes['remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, sid, false),
 					'disabled': volume?._disable_delete,
-				}, [dm2.ActionTypes['remove'].e]),
+				}, [dm2.ActionTypes['remove'].i18n]),
 				E('button', {
 					'class': 'cbi-button cbi-button-negative important remove',
 					'title': dm2.ActionTypes['force_remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, sid, true),
-				}, [dm2.ActionTypes['force_remove'].e]),
+				}, [dm2.ActionTypes['force_remove'].i18n]),
 			];
 			return E('td', { 'class': 'td middle cbi-section-actions' }, E('div', btns));
 		};
 
 		volSec.option(form.DummyValue, '_name', _('Name'));
 
-		o = volSec.option(form.DummyValue, 'Labels', _('Labels') + '  🏷️');
+		o = volSec.option(form.DummyValue, 'Labels', _('Labels'));
 		o.cfgvalue = view.objectCfgValueTT;
 
 		volSec.option(form.DummyValue, 'Driver', _('Driver'));

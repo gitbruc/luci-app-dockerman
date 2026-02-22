@@ -102,7 +102,7 @@ return dm2.dv.extend({
 		s.anonymous = true;
 
 		const prune = s.option(form.Button, '_prune', null);
-		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n} ${dm2.ActionTypes['prune'].e}`;
+		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
 		prune.onclick = L.bind(function(section_id, ev) {
 			return this.super('handleXHRTransfer', [{
@@ -134,7 +134,7 @@ return dm2.dv.extend({
 		conSec.addremove = true;
 		conSec.sortable = true;
 		conSec.filterrow = true;
-		conSec.addbtntitle = `${dm2.ActionTypes['create'].i18n} ${dm2.ActionTypes['create'].e}`;
+		conSec.addbtntitle = `${dm2.ActionTypes['create'].i18n}`;
 		conSec.footer = [
 			`${_('Total')} ${container_list.length}`,
 			[
@@ -188,20 +188,20 @@ return dm2.dv.extend({
 					dm2.ActionTypes['inspect'].i18n,
 					{showOutput: true, showSuccess: false}
 				)
-			}, [dm2.ActionTypes['inspect'].e]),
+			}, [dm2.ActionTypes['inspect'].i18n]),
 
 			E('button', {
 				'class': 'cbi-button cbi-button-positive edit',
 				'title': _('Edit this container'),
 				'click': () => window.location.href = `${view.dockerman_url}/container/${cont?.Id}`
-			}, [dm2.ActionTypes['edit'].e]),
+			}, [dm2.ActionTypes['edit'].i18n]),
 
 			(() => {
 				const icon = isRunning
-					? dm2.Types['container'].sub['pause'].e
+					? dm2.Types['container'].sub['pause'].i18n
 					: (isPaused 
-						? dm2.Types['container'].sub['unpause'].e
-						: dm2.Types['container'].sub['start'].e);
+						? dm2.Types['container'].sub['unpause'].i18n
+						: dm2.Types['container'].sub['start'].i18n);
 				const title = isRunning
 					? _('Pause this container')
 					: (isPaused ? _('Unpause this container') : _('Start this container'));
@@ -241,7 +241,7 @@ return dm2.dv.extend({
 					_('Restart'),
 					{showOutput: true, showSuccess: false}
 				)
-			}, [dm2.Types['container'].sub['restart'].e]),
+			}, [dm2.Types['container'].sub['restart'].i18n]),
 
 			E('button', {
 				'class': 'cbi-button cbi-button-neutral stop',
@@ -253,7 +253,7 @@ return dm2.dv.extend({
 					{showOutput: true, showSuccess: false}
 				),
 				'disabled' : !(isRunning || isPaused) ? true : null
-			}, [dm2.Types['container'].sub['stop'].e]),
+			}, [dm2.Types['container'].sub['stop'].i18n]),
 
 			E('button', {
 				'class': 'cbi-button cbi-button-negative kill',
@@ -265,7 +265,7 @@ return dm2.dv.extend({
 					{showOutput: true, showSuccess: false}
 				),
 				'disabled' : !(isRunning || isPaused) ? true : null
-			}, [dm2.Types['container'].sub['kill'].e]),
+			}, [dm2.Types['container'].sub['kill'].i18n]),
 
 			E('button', {
 				'class': 'cbi-button cbi-button-neutral export',
@@ -273,7 +273,7 @@ return dm2.dv.extend({
 				'click': () => {
 					window.location.href = `${view.dockerman_url}/container/export/${cont.Id}`;
 				}
-			}, [dm2.Types['container'].sub['export'].e]),
+			}, [dm2.Types['container'].sub['export'].i18n]),
 
 			E('div', {
 				'style': 'width: 20px',
@@ -289,7 +289,7 @@ return dm2.dv.extend({
 					dm2.ActionTypes['remove'].i18n,
 					{showOutput: true, showSuccess: false}
 				)
-			}, [dm2.ActionTypes['remove'].e]),
+			}, [dm2.ActionTypes['remove'].i18n]),
 
 			E('button', {
 				'class': 'cbi-button cbi-button-negative important remove',
@@ -300,7 +300,7 @@ return dm2.dv.extend({
 					_('Force Remove'),
 					{showOutput: true, showSuccess: false}
 				)
-			}, [dm2.ActionTypes['force_remove'].e]),
+			}, [dm2.ActionTypes['force_remove'].i18n]),
 		];
 
 		return E('td', { 

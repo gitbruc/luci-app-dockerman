@@ -93,7 +93,7 @@ return dm2.dv.extend({
 		tagOpt.placeholder = "[registry.io[:443]/]foobar/product:latest";
 
 		o = s.option(form.Button, '_pull');
-		o.inputtitle = `${dm2.Types['image'].sub['pull'].i18n} ${dm2.Types['image'].sub['pull'].e}`; // _('Pull') + ' ☁️⬇️'
+		o.inputtitle = `${dm2.Types['image'].sub['pull'].i18n}`; // _('Pull') + ' ☁️⬇️'
 		o.inputstyle = 'add';
 		o.onclick = L.bind(function(ev, btn) {
 			const raw = tagOpt.formvalue('pull') || '';
@@ -168,7 +168,7 @@ return dm2.dv.extend({
 		}
 
 		o = s.option(form.Button, '_push');
-		o.inputtitle = `${dm2.Types['image'].sub['push'].i18n} ${dm2.Types['image'].sub['push'].e}`; // _('Push') + ' ☁️⬆️'
+		o.inputtitle = `${dm2.Types['image'].sub['push'].i18n}`; // _('Push') + ' ☁️⬆️'
 		o.inputstyle = 'add';
 		o.onclick = L.bind(function(ev, btn) {
 			const selected = pushTagOpt.formvalue('push') || '';
@@ -214,7 +214,7 @@ return dm2.dv.extend({
 		buildTagOpt.placeholder = 'repository:tag';
 
 		o = s.option(form.Button, '_build');
-		o.inputtitle = `${dm2.ActionTypes['build'].i18n} ${dm2.ActionTypes['build'].e}`; // _('Build') + ' 🏗️'
+		o.inputtitle = `${dm2.ActionTypes['build'].i18n}`; // _('Build') + ' 🏗️'
 		o.inputstyle = 'add';
 		o.onclick = L.bind(function(ev, btn) {
 			const uri = buildOpt.formvalue('build') || '';
@@ -246,7 +246,7 @@ return dm2.dv.extend({
 		}, this);
 
 		o = s.option(form.Button, '_delete_cache', null);
-		o.inputtitle = `${dm2.ActionTypes['clean'].i18n} ${dm2.ActionTypes['clean'].e}`;
+		o.inputtitle = `${dm2.ActionTypes['clean'].i18n}`;
 		o.inputstyle = 'negative';
 		o.onclick = L.bind(function(ev, btn) {
 			return this.super('handleXHRTransfer', [{
@@ -284,7 +284,7 @@ return dm2.dv.extend({
 		tagimpOpt.placeholder = 'repository:tag';
 
 		let importBtn = s.option(form.Button, '_import');
-		importBtn.inputtitle = `${dm2.Types['image'].sub['import'].i18n} ${dm2.Types['image'].sub['import'].e}` //_('Import') + ' ➡️';
+		importBtn.inputtitle = `${dm2.Types['image'].sub['import'].i18n}` //_('Import') + ' ➡️';
 		importBtn.inputstyle = 'add';
 		importBtn.onclick = L.bind(function(ev, btn) {
 			const rawtag = tagimpOpt.formvalue('import') || '';
@@ -339,7 +339,7 @@ return dm2.dv.extend({
 		s.anonymous = true;
 
 		const prune = s.option(form.Button, '_prune', null);
-		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n} ${dm2.ActionTypes['prune'].e}`;
+		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
 		prune.onclick = L.bind(function(ev, btn) {
 
@@ -376,7 +376,7 @@ return dm2.dv.extend({
 		}, this);
 
 		o = s.option(form.Button, '_export', null);
-		o.inputtitle = `${dm2.ActionTypes['save'].i18n} ${dm2.ActionTypes['save'].e}`;
+		o.inputtitle = `${dm2.ActionTypes['save'].i18n}`;
 		o.inputstyle = 'cbi-button-positive';
 		o.onclick = L.bind(function(ev, btn) {
 			ev.preventDefault();
@@ -407,7 +407,7 @@ return dm2.dv.extend({
 		imgSec.addremove = true;
 		imgSec.sortable = true;
 		imgSec.filterrow = true;
-		imgSec.addbtntitle = `${dm2.ActionTypes['upload'].i18n} ${dm2.ActionTypes['upload'].e}`;
+		imgSec.addbtntitle = `${dm2.ActionTypes['upload'].i18n}`;
 		imgSec.footer = [
 			'',
 			`${_('Total')} ${image_list.length}`,
@@ -468,17 +468,17 @@ return dm2.dv.extend({
 					'class': 'cbi-button cbi-button-neutral',
 					'title': dm2.ActionTypes['inspect'].i18n,
 					'click': ui.createHandlerFn(this, this.handleInspect, image),
-				}, [dm2.ActionTypes['inspect'].e]),
+				}, [dm2.ActionTypes['inspect'].i18n]),
 				E('button', {
 					'class': 'cbi-button cbi-button-neutral',
 					'title': dm2.ActionTypes['history'].i18n,
 					'click': ui.createHandlerFn(this, this.handleHistory, image),
-				}, [dm2.ActionTypes['history'].e]),
+				}, [dm2.ActionTypes['history'].i18n]),
 				E('button', {
 					'class': 'cbi-button cbi-button-positive save',
 					'title': dm2.ActionTypes['save'].i18n,
 					'click': ui.createHandlerFn(this, this.handleGet, image),
-				}, [dm2.ActionTypes['save'].e]),
+				}, [dm2.ActionTypes['save'].i18n]),
 				E('div', {
 					'style': 'width: 20px',
 					// Some safety margin for mis-clicks
@@ -488,13 +488,13 @@ return dm2.dv.extend({
 					'title': dm2.ActionTypes['remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, sid, image, false),
 					'disabled': image?._disable_delete,
-				}, [dm2.ActionTypes['remove'].e]),
+				}, [dm2.ActionTypes['remove'].i18n]),
 				E('button', {
 					'class': 'cbi-button cbi-button-negative important remove',
 					'title': dm2.ActionTypes['force_remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, sid, image, true),
 					'disabled': image?._disable_delete,
-				}, [dm2.ActionTypes['force_remove'].e]),
+				}, [dm2.ActionTypes['force_remove'].i18n]),
 			];
 			return E('td', { 'class': 'td middle cbi-section-actions' }, E('div', btns));
 		};
@@ -510,7 +510,7 @@ return dm2.dv.extend({
 			return;
 		}
 
-		o = imgSec.option(form.DummyValue, 'RepoTags', dm2.Types['image'].sub['tag'].e);
+		o = imgSec.option(form.DummyValue, 'RepoTags', dm2.Types['image'].sub['tag'].i18n);
 		o.cfgvalue = function(sid) {
 			const image = this.map.data.data[sid];
 			const tags = Array.isArray(image?.RepoTags) ? image.RepoTags : [];
@@ -538,7 +538,7 @@ return dm2.dv.extend({
 								E('button', {
 									'class': 'cbi-button',
 									'click': ui.hideModal
-								}, '↩'),
+								}, _('Cancel')),
 								' ',
 								E('button', {
 									'class': 'cbi-button cbi-button-negative',
@@ -557,7 +557,7 @@ return dm2.dv.extend({
 											}
 										);
 									})
-								}, dm2.Types['image'].sub['untag'].e)
+								}, dm2.Types['image'].sub['untag'].i18n)
 							])
 						]);
 					}, tag, image.Id)
@@ -646,7 +646,7 @@ return dm2.dv.extend({
 							E('button', {
 								'class': 'cbi-button',
 								'click': ui.hideModal
-							}, ['↩']),
+							}, [_('Cancel')]),
 							' ',
 							E('button', {
 								'class': 'cbi-button cbi-button-positive',
@@ -673,7 +673,7 @@ return dm2.dv.extend({
 										}
 									);
 								})
-							}, [dm2.Types['image'].sub['tag'].e])
+							}, [dm2.Types['image'].sub['tag'].i18n])
 						])
 					]);
 				}, fullId)

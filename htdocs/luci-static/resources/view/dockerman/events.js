@@ -72,7 +72,7 @@ return dm2.dv.extend({
 						}, [
 							E('option', { 'value': '' }, _('All Types')),
 							...Object.keys(dm2.Types).map(type => 
-								E('option', { 'value': type }, `${dm2.Types[type].e} ${dm2.Types[type].i18n}`)
+								E('option', { 'value': type }, `${dm2.Types[type].i18n}`)
 							)
 						])
 					])
@@ -225,12 +225,12 @@ return dm2.dv.extend({
 			const rows = ev_array.map(event => {
 				const type = event.Type;
 				const typeInfo = dm2.Types[type];
-				const typeDisplay = typeInfo ? `${typeInfo.e} ${typeInfo.i18n}` : type;
+				const typeDisplay = typeInfo ? `${typeInfo.i18n}` : type;
 				const actionParts = event.Action?.split(':') || [];
 				const action = actionParts.length > 0 ? actionParts[0] : '';
 				const action_sub = actionParts.length > 1 ? actionParts[1] : null;
 				const actionInfo = typeInfo?.sub?.[action];
-				const actionDisplay = actionInfo ? `${actionInfo.e} ${actionInfo.i18n}${action_sub ? ':'+action_sub : ''}` : action;
+				const actionDisplay = actionInfo ? `${actionInfo.i18n}${action_sub ? ':'+action_sub : ''}` : action;
 				return [
 					view.buildTimeString(event.time),
 					typeDisplay,
@@ -344,7 +344,7 @@ return dm2.dv.extend({
 		const subtypes = dm2.Types[selectedType].sub;
 		for (const action in subtypes) {
 			subtypeSelect.appendChild(
-				E('option', { 'value': action }, `${subtypes[action].e} ${subtypes[action].i18n}`)
+				E('option', { 'value': action }, `${subtypes[action].i18n}`)
 			);
 		}
 	},

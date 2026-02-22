@@ -555,8 +555,8 @@ return dm2.dv.extend({
 		ss.anonymous = true;
 		ss.nodescriptions = true;
 		ss.addremove = true;
-		ss.addbtntitle = _('Connect') + ' 🔗';
-		ss.delbtntitle = _('Disconnect') + ' ⛓️‍💥';
+		ss.addbtntitle = _('Connect');
+		ss.delbtntitle = _('Disconnect');
 
 		o = ss.option(form.DummyValue, 'Name', _('Name'));
 
@@ -937,17 +937,17 @@ return dm2.dv.extend({
 						'class': 'cbi-button cbi-button-positive',
 						'style': 'margin-left: 10px;',
 						'click': () => this.handleFileUpload(this_container.Id),
-					}, _('Upload') + ' ⬆️'),
+					}, _('Upload')),
 					E('button', {
 						'class': 'cbi-button cbi-button-neutral',
 						'style': 'margin-left: 5px;',
 						'click': () => this.handleFileDownload(this_container.Id),
-					}, _('Download') + ' ⬇️'),
+					}, _('Download')),
 					E('button', {
 						'class': 'cbi-button cbi-button-neutral',
 						'style': 'margin-left: 5px;',
 						'click': () => this.handleInfoArchive(this_container.Id),
-					}, _('Inspect') + ' 🔎'),
+					}, _('Inspect')),
 				]),
 				E('textarea', {
 					'id': 'container-file-text',
@@ -981,7 +981,7 @@ return dm2.dv.extend({
 							output.textContent = JSON.stringify(response.body, null, 2);
 							return;
 						}),
-					}, _('Inspect') + ' 🔎'),
+					}, _('Inspect')),
 				]),
 			]);
 

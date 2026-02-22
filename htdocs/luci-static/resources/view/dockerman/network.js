@@ -139,7 +139,7 @@ return dm2.dv.extend({
 		ss.nodescriptions = true;
 
 		o = ss.option(form.Button, '_inspect_button', null);
-		o.inputtitle = `${dm2.ActionTypes['inspect'].i18n} ${dm2.ActionTypes['inspect'].e}`;
+		o.inputtitle = `${dm2.ActionTypes['inspect'].i18n}`;
 		o.inputstyle = 'neutral';
 		o.onclick = L.bind(function(section_id, ev) {
 			return dm2.network_inspect({ id: this_network.Id }).then((response) => {

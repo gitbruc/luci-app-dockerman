@@ -64,7 +64,7 @@ return dm2.dv.extend({
 		s.anonymous = true;
 
 		const prune = s.option(form.Button, '_prune', null);
-		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n} ${dm2.ActionTypes['prune'].e}`;
+		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
 		prune.onclick = L.bind(function(section_id, ev) {
 
@@ -107,7 +107,7 @@ return dm2.dv.extend({
 		netSec.addremove = true;
 		netSec.sortable = true;
 		netSec.filterrow = true;
-		netSec.addbtntitle = `${dm2.ActionTypes['create'].i18n} ${dm2.ActionTypes['create'].e}`;
+		netSec.addbtntitle = `${dm2.ActionTypes['create'].i18n}`;
 		netSec.footer = [
 			`${_('Total')} ${network_list.length}`,
 		];
@@ -152,7 +152,7 @@ return dm2.dv.extend({
 					'class': 'cbi-button view',
 					'title': dm2.ActionTypes['inspect'].i18n,
 					'click': ui.createHandlerFn(this, this.handleInspect, section_id),
-				}, [dm2.ActionTypes['inspect'].e]),
+				}, [dm2.ActionTypes['inspect'].i18n]),
 
 				E('div', {
 					'style': 'width: 20px',
@@ -164,13 +164,13 @@ return dm2.dv.extend({
 					'title': dm2.ActionTypes['remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, section_id, false),
 					'disabled': network?._disable_delete,
-				}, dm2.ActionTypes['remove'].e),
+				}, dm2.ActionTypes['remove'].i18n),
 				E('button', {
 					'class': 'cbi-button cbi-button-negative important remove',
 					'title': dm2.ActionTypes['force_remove'].i18n,
 					'click': ui.createHandlerFn(this, this.handleRemove, section_id, true),
 					'disabled': network?._disable_delete,
-				}, dm2.ActionTypes['force_remove'].e),
+				}, dm2.ActionTypes['force_remove'].i18n),
 			];
 			return E('td', { 'class': 'td middle cbi-section-actions' }, E('div', btns));
 		};
@@ -179,7 +179,7 @@ return dm2.dv.extend({
 
 		o = netSec.option(form.DummyValue, 'Name', _('Name'));
 
-		o = netSec.option(form.DummyValue, 'Labels', _('Labels') + '  🏷️');
+		o = netSec.option(form.DummyValue, 'Labels', _('Labels'));
 		o.cfgvalue = view.objectCfgValueTT;
 
 		o = netSec.option(form.DummyValue, '_container', _('Containers'));
