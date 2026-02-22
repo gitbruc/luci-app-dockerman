@@ -162,7 +162,7 @@ msgstr "权限控制 (--cap-add)"
 
 #: applications/luci-app-dockerman/htdocs/luci-static/resources/view/dockerman/container.js:839
 msgid "COMMAND"
-msgstr "COMMAND"
+msgstr "命令"
 
 #: applications/luci-app-dockerman/htdocs/luci-static/resources/view/dockerman/container_new.js:672
 msgid "CPU Period"
