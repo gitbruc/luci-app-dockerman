@@ -101,6 +101,7 @@ return dm2.dv.extend({
 		s.addremove = false;
 		s.anonymous = true;
 
+		/*
 		const prune = s.option(form.Button, '_prune', null);
 		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
@@ -122,6 +123,7 @@ return dm2.dv.extend({
 				noFileUpload: true,
 			}]);
 		}, this);
+		*/
 
 		const totals = calculateTotals();
 		let running_total = totals.running_total;
