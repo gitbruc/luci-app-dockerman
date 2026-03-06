@@ -101,6 +101,7 @@ return dm2.dv.extend({
 		s.addremove = false;
 		s.anonymous = true;
 
+		/*
 		const prune = s.option(form.Button, '_prune', null);
 		prune.inputtitle = `${dm2.ActionTypes['prune'].i18n}`;
 		prune.inputstyle = 'negative';
@@ -122,6 +123,7 @@ return dm2.dv.extend({
 				noFileUpload: true,
 			}]);
 		}, this);
+		*/
 
 		const totals = calculateTotals();
 		let running_total = totals.running_total;
@@ -344,12 +346,20 @@ return dm2.dv.extend({
 				Created: this.buildTimeString(cont?.Created) || '',
 				Ports: (Array.isArray(cont.Ports) && cont.Ports.length > 0)
 						? cont.Ports.map(p => {
-							// const ip = p.IP || '';
 							const pub = p.PublicPort || '';
 							const priv = p.PrivatePort || '';
 							const type = p.Type || '';
-							return `${pub ? pub + ':' : ''}${priv}/${type}`;
-							// return `${ip ? ip + ':' : ''}${pub} -> ${priv} (${type})`;
+							const displayText = `${pub ? pub + ':' : ''}${priv}/${type}`;
+							if (!pub) {
+								return displayText;
+							}
+							const host = p.IP;
+							if (!host || host === '0.0.0.0' || host === '::') {
+								const onclick = `window.open((window.location.origin.match(/^(.+):\\d+$/) && window.location.origin.match(/^(.+):\\d+$/)[1] || window.location.origin) + ':${pub}', '_blank')`;
+								return `<a href="javascript:void(0);" onclick="${onclick}">${displayText}</a>`;
+							}
+							const urlHost = host.includes(':') ? `[${host}]` : host;
+							return `<a href="http://${urlHost}:${pub}" target="_blank">${displayText}</a>`;
 						}).join('<br/>')
 						: '',
 			});
