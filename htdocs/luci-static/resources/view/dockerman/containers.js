@@ -343,6 +343,7 @@ return dm2.dv.extend({
 				cid: cid,
 				_shortId: (cont?.Id || '').substring(0, 12),
 				Networks: this.parseNetworkLinksForContainer(network_list, cont?.NetworkSettings?.Networks || {}, true),
+				Command: cont.Command ? E('div', { 'style': 'word-break: break-all;' }, String(cont.Command)) : '',
 				Created: this.buildTimeString(cont?.Created) || '',
 				Ports: (Array.isArray(cont.Ports) && cont.Ports.length > 0)
 						? cont.Ports.map(p => {
